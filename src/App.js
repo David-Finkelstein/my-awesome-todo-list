@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
-import AddTodo from "./components/AddTodo";
+import { Button } from 'reactstrap';
 import TodoList from "./components/TodoList";
 import './App.css';
 
@@ -13,30 +14,29 @@ class App extends React.Component {
     }
 
     render() {
-        const { todoArray, onAddTodo, onDeleteTodo, onChangeTodoStatus } = this.props;
+        const { todoArray, onDeleteTodo, onChangeTodoStatus } = this.props;
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-2"/>
-                    <div className="col-md-8">
-                        <div className="todolist not-done">
-                            <div>
-                                <h1>Todos</h1>
-                                <hr/>
-                                <AddTodo onAddTodo={onAddTodo}/>
-                                <TodoList
-                                    todoArray={todoArray}
-                                    onDelete={onDeleteTodo}
-                                    onStatusChanged={onChangeTodoStatus}
-                                />
-                                <div className="todo-footer">
-                                    <strong>
-                                        <span className="count-todos">{`Items Left to do: ${this.itemsLeft()}`}</span>
-                                    </strong>
-                                </div>
+            <div>
+                <h1>Todos</h1>
+                <hr/>
+                <Link to="/new">
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <div className="text-center">
+                                <Button className="btn btn-primary center-block">Add Todo</Button>
                             </div>
                         </div>
                     </div>
+                </Link>
+                <TodoList
+                    todoArray={todoArray}
+                    onDelete={onDeleteTodo}
+                    onStatusChanged={onChangeTodoStatus}
+                />
+                <div className="todo-footer">
+                    <strong>
+                        <span className="count-todos">{`Items Left to do: ${this.itemsLeft()}`}</span>
+                    </strong>
                 </div>
             </div>
         );
