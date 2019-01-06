@@ -1,6 +1,7 @@
 import React from 'react';
-import _ from 'lodash';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
+import { Button } from 'reactstrap';
 
 class AddTodo extends React.Component {
     constructor(Props) {
@@ -21,13 +22,8 @@ class AddTodo extends React.Component {
     onAddTodo() {
         const { textAreaValue } = this.state;
         const { onAddTodo } = this.props;
-        const todo = {
-            text: textAreaValue,
-            finished: false,
-            id: new Date().getTime()
-        };
 
-        onAddTodo(todo);
+        onAddTodo(textAreaValue);
         this.setState({ textAreaValue: '' });
     }
 
@@ -41,13 +37,13 @@ class AddTodo extends React.Component {
                     onChange={this.onTextAreaChanged}
                     value={textAreaValue}
                 />
-                <button
+                <Button
                     className="btn btn-outline-success add-todo"
                     onClick={this.onAddTodo}
                     disabled={!textAreaValue}
                 >
                     Add Todo
-                </button>
+                </Button>
             </div>
         );
     }

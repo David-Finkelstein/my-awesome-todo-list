@@ -1,18 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types';
+import { Button } from 'reactstrap';
+
 
 const TodoItem = (props) => {
     const { todoProperties, onDelete, onStatusChanged } = props;
     return (
-        <li className="ui-state-default">
+        <li className="ui-state-default" key={todoProperties.id}>
             <div className={todoProperties.finished ? "checked" : "unchecked"}>
                 <label onClick={onStatusChanged.bind(null, todoProperties.id)}>{todoProperties.text}</label>
-                <button
+                <Button
                     className="btn btn-sm btn-outline-danger"
                     onClick={onDelete.bind(null, todoProperties.id)}
                 >
                     Delete
-                </button>
+                </Button>
             </div>
         </li>
     )
