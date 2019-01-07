@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import { ON_CHANGE_TODO_STATUS, ON_DELETE_TODO } from "./todoList.actions";
-import {ON_ADD_TODO} from "../AddTodo/addTodoWizard.actions";
+import {ON_ADD_TODO} from "../AddTodoWizard/addTodoWizard.actions";
 
 const defaultState = Immutable.fromJS({
     12464535: {

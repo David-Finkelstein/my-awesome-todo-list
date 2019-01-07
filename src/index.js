@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import * as serviceWorker from './serviceWorker';
 import store from './store/store'
-import AddTodo from './AddTodo'
+import AddTodo from './AddTodoWizard'
 import App from './App'
 
 ReactDOM.render(
