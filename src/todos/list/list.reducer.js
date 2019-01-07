@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
-import { TOGGLE_TODO_STATUS, DELETE_TODO } from "./todoList.actions";
-import { ADD_TODO } from "../AddTodoWizard/addTodoWizard.actions";
+import { TOGGLE_TODO_STATUS, DELETE_TODO } from "./list.actions";
+import {ADD_TODO, EDIT_TODO_TEXT} from "../wizard/wizard.actions";
 
 const defaultState = Immutable.fromJS({
     12464535: {
@@ -32,6 +32,9 @@ export default (state = defaultState, action) => {
             return state.delete(payload.toString());
         case TOGGLE_TODO_STATUS:
             return state.updateIn([payload.toString(), 'finished'], val => !val);
+        case EDIT_TODO_TEXT:
+            return state.updateIn([payload.todoId, 'text'], () => payload.text)
+                .updateIn([payload.todoId, 'finished'], () => false);
         default:
             return state;
     }

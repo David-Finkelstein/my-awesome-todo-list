@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 import { connect } from "react-redux";
 import { Button } from 'reactstrap';
 
-import TodoList from "./TodoList";
+import List from "../todos/list/";
 
-class App extends React.Component {
+class TodoList extends React.Component {
     itemsLeft() {
         const { todoArray } = this.props;
         return todoArray.reduce((accumulator, current) => {
@@ -28,7 +28,7 @@ class App extends React.Component {
                         </div>
                     </div>
                 </Link>
-                <TodoList/>
+                <List/>
                 <div className="todo-footer">
                     <strong>
                         <span className="count-todos">{`Items Left to do: ${this.itemsLeft()}`}</span>
@@ -45,4 +45,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(TodoList)

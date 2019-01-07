@@ -3,23 +3,21 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import TodoItem from "./components/TodoItem/index";
-import { toggleTodoStatus, deleteTodo } from "./todoList.actions";
+import TodoItem from "./components/ListItem";
+import { toggleTodoStatus, deleteTodo } from "./list.actions";
 
-class TodoList extends React.Component {
+class List extends React.Component {
     render() {
         const { todoArray, deleteTodo, toggleTodoStatus } = this.props;
         return (
             <ul className="list-unstyled">
-                {todoArray.map(todoProperties =>
-                    TodoItem({ todoProperties, deleteTodo, toggleTodoStatus})
-                )}
+                {todoArray.map(todoProperties => TodoItem({ todoProperties, deleteTodo, toggleTodoStatus}))}
             </ul>
         )
     }
 }
 
-TodoList.propTypes = {
+List.propTypes = {
     todoArray: PropTypes.array.isRequired,
     deleteTodo: PropTypes.func.isRequired,
     toggleTodoStatus: PropTypes.func.isRequired,
@@ -36,4 +34,4 @@ const mapDispatchToProps =  {
     toggleTodoStatus,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
+export default connect(mapStateToProps, mapDispatchToProps)(List)
