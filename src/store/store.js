@@ -1,9 +1,7 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import allMiddleware from './middleware';
-import allReducers from './reducers';
+import { createStore, combineReducers } from 'redux';
+import todoList from '../TodoList/todoList.reducer'
 
-const middleware = applyMiddleware(...allMiddleware);
-const reducer = combineReducers(allReducers);
-const store = createStore(reducer, undefined, middleware);
+const reducer = combineReducers({todoList });
+const store = createStore(reducer, undefined, undefined);
 
 export default store;

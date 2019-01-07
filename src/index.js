@@ -1,30 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import * as serviceWorker from './serviceWorker';
 import store from './store/store'
-import AppContainer from "./containers/AppContainer/AppContainer";
-import AddTodoContainer from "./containers/AddTodoContainer/AddTodoContainer";
-import './index.css';
+import AddTodo from './AddTodo'
+import App from './App'
 
 ReactDOM.render(
     <Provider store={store}>
         <Router>
-            <div>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-2"/>
-                        <div className="col-md-8">
-                            <div className="todolist not-done">
-                                <Route exact path="/" component={AppContainer}/>
-                                <Route path="/new" component={AddTodoContainer}/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Switch>
+                <Route exact path="/" component={App}/>
+                <Route path="/new" component={AddTodo}/>
+            </Switch>
         </Router>
     </Provider>,
     document.getElementById('root'));

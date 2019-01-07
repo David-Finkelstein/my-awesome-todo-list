@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom'
 import { Button } from 'reactstrap';
+
+import {onAddTodo} from "./addTodoWizard.actions";
 
 class AddTodo extends React.Component {
     constructor(Props) {
@@ -68,11 +71,17 @@ class AddTodo extends React.Component {
     }
 }
 
-export default AddTodo;
-
 AddTodo.propTypes = {
     onAddTodo: PropTypes.func.isRequired,
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
     }).isRequired,
 };
+
+function mapDispatchToProps(dispatch) {
+    return {
+        onAddTodo: text => dispatch(onAddTodo(text)),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(withRouter(AddTodo));
