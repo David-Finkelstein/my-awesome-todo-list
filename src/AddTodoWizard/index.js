@@ -6,7 +6,7 @@ import { Button } from 'reactstrap';
 
 import {onAddTodo} from "./addTodoWizard.actions";
 
-class AddTodo extends React.Component {
+class AddTodoWizard extends React.Component {
     constructor(Props) {
         super(Props);
         this.state = {
@@ -71,7 +71,7 @@ class AddTodo extends React.Component {
     }
 }
 
-AddTodo.propTypes = {
+AddTodoWizard.propTypes = {
     onAddTodo: PropTypes.func.isRequired,
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
@@ -84,4 +84,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(AddTodo));
+export default connect(null, mapDispatchToProps)(withRouter(AddTodoWizard));
