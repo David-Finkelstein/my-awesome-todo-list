@@ -25,18 +25,18 @@ class AddTodoWizard extends React.Component {
 
     onAddTodo() {
         const { textAreaValue } = this.state;
-        const { onAddTodo } = this.props;
+        const { addTodo } = this.props;
 
-        onAddTodo(textAreaValue);
+        addTodo(textAreaValue);
         this.setState({ textAreaValue: '' });
     }
 
     onEnterClicked(key) {
         const { textAreaValue } = this.state;
-        const { onAddTodo } = this.props;
+        const { addTodo } = this.props;
 
         if(key === 'Enter' && textAreaValue.length > 0 ){
-            onAddTodo(textAreaValue);
+            addTodo(textAreaValue);
             this.setState({ textAreaValue: '' });
             this.props.history.push('/')
         }
@@ -73,7 +73,7 @@ class AddTodoWizard extends React.Component {
 }
 
 AddTodoWizard.propTypes = {
-    onAddTodo: PropTypes.func.isRequired,
+    addTodo: PropTypes.func.isRequired,
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
     }).isRequired,
