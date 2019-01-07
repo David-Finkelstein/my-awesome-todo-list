@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom'
 import { Button } from 'reactstrap';
 
-import {onAddTodo} from "./addTodoWizard.actions";
+import { addTodo } from "./addTodoWizard.actions";
 
 class AddTodoWizard extends React.Component {
     constructor(Props) {
@@ -44,6 +44,7 @@ class AddTodoWizard extends React.Component {
 
     render() {
         const { textAreaValue } = this.state;
+        const { match: {params: { id } } } = this.props;
         return (
             <div>
             <textarea
@@ -78,10 +79,8 @@ AddTodoWizard.propTypes = {
     }).isRequired,
 };
 
-function mapDispatchToProps(dispatch) {
-    return {
-        onAddTodo: text => dispatch(onAddTodo(text)),
-    }
-}
+const mapDispatchToProps = {
+    addTodo,
+};
 
 export default connect(null, mapDispatchToProps)(withRouter(AddTodoWizard));

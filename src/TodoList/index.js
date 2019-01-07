@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import TodoItem from "./components/TodoItem/index";
-import { onChangeTodoStatus, onDeleteTodo } from "./todoList.actions";
+import { toggleTodoStatus, deleteTodo } from "./todoList.actions";
 
 class TodoList extends React.Component {
     render() {
-        const { todoArray, onDeleteTodo, onChangeTodoStatus } = this.props;
+        const { todoArray, deleteTodo, toggleTodoStatus } = this.props;
         return (
             <ul className="list-unstyled">
                 {todoArray.map(todoProperties =>
-                    TodoItem({ todoProperties, onDeleteTodo, onChangeTodoStatus})
+                    TodoItem({ todoProperties, deleteTodo, toggleTodoStatus})
                 )}
             </ul>
         )
@@ -21,8 +21,8 @@ class TodoList extends React.Component {
 
 TodoList.propTypes = {
     todoArray: PropTypes.array.isRequired,
-    onDeleteTodo: PropTypes.func.isRequired,
-    onChangeTodoStatus: PropTypes.func.isRequired,
+    deleteTodo: PropTypes.func.isRequired,
+    toggleTodoStatus: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -32,8 +32,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps =  {
-    onDeleteTodo,
-    onChangeTodoStatus,
+    deleteTodo: deleteTodo,
+    toggleTodoStatus: toggleTodoStatus,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
