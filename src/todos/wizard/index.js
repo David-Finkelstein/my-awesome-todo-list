@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom'
 import { Button } from 'reactstrap';
 
-import { addTodo } from "./addTodoWizard.actions";
-
-class AddTodoWizard extends React.Component {
+class TodoWizard extends React.Component {
     constructor(Props) {
         super(Props);
         this.state = {
@@ -25,31 +23,32 @@ class AddTodoWizard extends React.Component {
 
     onAddTodo() {
         const { textAreaValue } = this.state;
-        const { addTodo } = this.props;
+        const { callback } = this.props;
 
-        addTodo(textAreaValue);
+        callback(textAreaValue);
         this.setState({ textAreaValue: '' });
     }
 
     onEnterClicked(key) {
         const { textAreaValue } = this.state;
-        const { addTodo } = this.props;
+        const { callback, history } = this.props;
 
         if(key === 'Enter' && textAreaValue.length > 0 ){
-            addTodo(textAreaValue);
+            callback(textAreaValue);
+            history.push('/');
             this.setState({ textAreaValue: '' });
-            this.props.history.push('/')
         }
     }
 
     render() {
         const { textAreaValue } = this.state;
-        const { match: {params: { id } } } = this.props;
+        const { match: { params: { id } }, title, callback, btnText } = this.props;
         return (
             <div>
             <textarea
                 className="form-control"
-                placeholder="New todo" rows="3"
+                placeholder={title}
+                rows="3"
                 onChange={this.onTextAreaChanged}
                 value={textAreaValue}
                 onKeyPress={e => this.onEnterClicked(e.key)}
@@ -57,10 +56,9 @@ class AddTodoWizard extends React.Component {
                 <Link to="/">
                     <Button
                         className="btn btn-outline-success add-todo"
-                        onClick={this.onAddTodo}
-                        disabled={!textAreaValue}
-                    >
-                        Add Todo
+                        onClick={callback.bind(null,textAreaValue,id)}
+                        disabled={!textAreaValue}>
+                        {btnText}
                     </Button>
                     <Button className="btn btn-outline-success add-todo float-right">
                         Back to - Todo List
@@ -72,15 +70,13 @@ class AddTodoWizard extends React.Component {
     }
 }
 
-AddTodoWizard.propTypes = {
-    addTodo: PropTypes.func.isRequired,
+TodoWizard.propTypes = {
+    callback: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    btnText: PropTypes.string.isRequired,
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
     }).isRequired,
 };
 
-const mapDispatchToProps = {
-    addTodo,
-};
-
-export default connect(null, mapDispatchToProps)(withRouter(AddTodoWizard));
+export default connect()(withRouter(TodoWizard));

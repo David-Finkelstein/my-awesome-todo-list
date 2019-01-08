@@ -1,5 +1,5 @@
 import { createStore, combineReducers } from 'redux';
-import todoList from '../TodoList/todoList.reducer'
+import todoList from './todos/list/list.reducer'
 
 const reducer = combineReducers({ todoList });
 const store = createStore(reducer, undefined, undefined);
