@@ -1,24 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types';
+import { Button } from 'reactstrap';
 
 const TodoItem = (props) => {
-    const { todoProperties, onDelete, onStatusChanged } = props;
+    const { todoProperties, deleteTodo, toggleTodoStatus } = props;
     return (
-        <li className="ui-state-default">
+        <li className="ui-state-default" key={todoProperties.id}>
             <div className={todoProperties.finished ? "checked" : "unchecked"}>
-                <label onClick={onStatusChanged.bind(null, todoProperties.id)}>{todoProperties.text}</label>
-                <button
+                <label onClick={toggleTodoStatus.bind(null, todoProperties.id)}>{todoProperties.text}</label>
+                <Button
                     className="btn btn-sm btn-outline-danger"
-                    onClick={onDelete.bind(null, todoProperties.id)}
+                    onClick={deleteTodo.bind(null, todoProperties.id)}
                 >
                     Delete
-                </button>
+                </Button>
             </div>
         </li>
     )
 };
-
-export default TodoItem;
 
 TodoItem.propTypes = {
     todoProperties: PropTypes.shape({
@@ -26,6 +25,8 @@ TodoItem.propTypes = {
         finished: PropTypes.bool.isRequired,
         id: PropTypes.number.isRequired
     }).isRequired,
-    onDelete: PropTypes.func.isRequired,
-    onStatusChanged: PropTypes.func.isRequired,
+    deleteTodo: PropTypes.func.isRequired,
+    toggleTodoStatus: PropTypes.func.isRequired,
 };
+
+export default TodoItem;
