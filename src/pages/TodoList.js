@@ -17,7 +17,7 @@ class TodoList extends React.Component {
     render() {
         return (
             <div>
-                <h1>Todos</h1>
+                <h1 className="m-0 pb-4 text-center">Todos</h1>
                 <hr/>
                 <Link to="/new">
                     <div className="row">
@@ -29,7 +29,7 @@ class TodoList extends React.Component {
                     </div>
                 </Link>
                 <List/>
-                <div className="todo-footer">
+                <div className="border-top-1 mx-n20 mb-n10 bg-light pt-10 pr-20">
                     <strong>
                         <span className="count-todos">{`Items Left to do: ${this.itemsLeft()}`}</span>
                     </strong>

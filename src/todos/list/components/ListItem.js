@@ -2,17 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom'
+import cn from 'classnames';
 
 const TodoItem = (props) => {
     const { todoProperties: { id ,finished, text }, deleteTodo, toggleTodoStatus } = props;
     return (
-        <li className="ui-state-default" key={id}>
-            <div className={finished ? "checked" : "unchecked"}>
+        <li className="ui-state-default bg-white border-0 border-bottom-1 pt-3 pr-0" key={id}>
+            <div className={cn({"checked": finished})}>
                 <label onClick={toggleTodoStatus.bind(null, id)}>{text}</label>
                 <Link to={`/todos/${id}`}>
-                    <Button className="btn btn-sm btn-outline-success">Edit</Button>
+                    <Button className="btn btn-sm btn-outline-success ml-5">Edit</Button>
                 </Link>
-                <Button className="btn btn-sm btn-outline-danger" onClick={deleteTodo.bind(null, id)}>Delete</Button>
+                <Button className="btn btn-sm btn-outline-danger ml-5" onClick={deleteTodo.bind(null, id)}>Delete</Button>
             </div>
         </li>
     )

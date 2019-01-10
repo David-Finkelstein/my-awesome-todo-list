@@ -14,6 +14,7 @@ class TodoWizard extends React.Component {
         this.onTextAreaChanged = this.onTextAreaChanged.bind(this);
         this.onAddTodo = this.onAddTodo.bind(this);
         this.onEnterClicked = this.onEnterClicked.bind(this);
+        this.onButtonSaveOrAddClicked = this.onButtonSaveOrAddClicked.bind(this);
     }
 
     onTextAreaChanged(event) {
@@ -40,9 +41,17 @@ class TodoWizard extends React.Component {
         }
     }
 
+    onButtonSaveOrAddClicked(){
+        const { textAreaValue } = this.state;
+        const { id, history, callback } = this.props;
+
+        callback(textAreaValue,id);
+        history.push('/');
+    }
+
     render() {
         const { textAreaValue } = this.state;
-        const { match: { params: { id } }, title, callback, btnText } = this.props;
+        const { title, btnText } = this.props;
         return (
             <div>
             <textarea
@@ -53,14 +62,14 @@ class TodoWizard extends React.Component {
                 value={textAreaValue}
                 onKeyPress={e => this.onEnterClicked(e.key)}
             />
+                <Button
+                    className="btn btn-outline-success mt-2"
+                    onClick={this.onButtonSaveOrAddClicked}
+                    disabled={!textAreaValue}>
+                    {btnText}
+                </Button>
                 <Link to="/">
-                    <Button
-                        className="btn btn-outline-success add-todo"
-                        onClick={callback.bind(null,textAreaValue,id)}
-                        disabled={!textAreaValue}>
-                        {btnText}
-                    </Button>
-                    <Button className="btn btn-outline-success add-todo float-right">
+                    <Button className="btn btn-outline-success float-right">
                         Back to - Todo List
                     </Button>
                 </Link>

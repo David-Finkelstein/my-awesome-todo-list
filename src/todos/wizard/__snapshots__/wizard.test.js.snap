@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TodoWizard /> takes a snapshot of the component and check if the prev snapshot equals to the current 1`] = `null`;
