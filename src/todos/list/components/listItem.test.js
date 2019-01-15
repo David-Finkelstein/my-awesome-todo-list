@@ -37,7 +37,7 @@ describe('<ListItem />', () => {
 
     it('checks the functionality of delete item', () => {
         const wrapper = shallow(<ListItem {...mockProps}/>);
-        const deleteBtn = wrapper.find('Button.btn-outline-danger');
+        const deleteBtn = wrapper.find('.btn').at(1);
 
         expect(mockProps.deleteTodo.mock.calls.length).toBe(0);
         deleteBtn.props().onClick();

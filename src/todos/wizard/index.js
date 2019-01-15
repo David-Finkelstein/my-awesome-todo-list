@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom'
-import { Button } from 'reactstrap';
+import { Button, Textarea } from '@guestyci/atomic-design/dist/components';
 
 class TodoWizard extends React.Component {
     constructor(Props) {
@@ -54,22 +54,25 @@ class TodoWizard extends React.Component {
         const { title, btnText } = this.props;
         return (
             <div>
-            <textarea
-                className="form-control"
-                placeholder={title}
-                rows="3"
-                onChange={this.onTextAreaChanged}
-                value={textAreaValue}
-                onKeyPress={e => this.onEnterClicked(e.key)}
-            />
+                <Textarea
+                    className="form-control"
+                    placeholder={title}
+                    rows="3"
+                    onChange={this.onTextAreaChanged}
+                    value={textAreaValue}
+                    onKeyPress={e => this.onEnterClicked(e.key)}
+                />
                 <Button
-                    className="btn btn-outline-success mt-2"
+                    id="AddOrEditBtn"
+                    className="btn mt-2"
                     onClick={this.onButtonSaveOrAddClicked}
-                    disabled={!textAreaValue}>
+                    disabled={!textAreaValue}
+                    color="success"
+                >
                     {btnText}
                 </Button>
                 <Link to="/">
-                    <Button className="btn btn-outline-success float-right">
+                    <Button className="btn mt-2 float-right" color="success">
                         Back to - Todo List
                     </Button>
                 </Link>
