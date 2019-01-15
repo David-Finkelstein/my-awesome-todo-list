@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import { TOGGLE_TODO_STATUS, DELETE_TODO } from "./list.actions";
-import {ADD_TODO, EDIT_TODO_TEXT} from "../wizard/wizard.actions";
+import { ADD_TODO, EDIT_TODO_TEXT } from "../wizard/wizard.actions";
 
 const defaultState = Immutable.fromJS({
     12464535: {

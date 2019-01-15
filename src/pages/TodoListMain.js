@@ -5,49 +5,27 @@ import { Link } from 'react-router-dom'
 import { Button, Search } from '@guestyci/atomic-design/dist/components';
 
 import List from "../todos/list/";
+import { filterTodos } from "./todoListMain.actions";
 
-class TodoList extends React.Component {
+class TodoListMain extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            todoArray: [],
-            filterBy: '',
-        };
 
         this.onSearchChanged = this.onSearchChanged.bind(this);
     }
     itemsLeft() {
-        const { todoArray } = this.state;
+        const { todoArray } = this.props;
         return todoArray.reduce((accumulator, current) => {
             return accumulator + !current.finished;
         }, 0);
     }
 
     onSearchChanged(value) {
-        this.setState({filterBy: value})
-    }
-
-    static getDerivedStateFromProps(props, state) {
-        const { todoArray } = props;
-        const { filterBy } = state;
-        let newState = null;
-
-        if (state.filterBy !== ''){
-            const filteredArray = todoArray.filter(todo => todo.text.toLowerCase().includes(filterBy));
-            newState = { todoArray: filteredArray };
-        } else {
-            newState = { todoArray: todoArray };
-        }
-
-        return newState;
-    }
-
-    static shouldComponentUpdate(nextProps, nextState) {
-        return _.isEqual(nextState,this.state);
+        this.props.filterTodos(value);
     }
 
     render() {
-        const { todoArray } =this.state;
+        const { todoArray } = this.props;
         return (
             <div>
                 <h1 className="m-0 pb-4 text-center">Todos</h1>
@@ -73,10 +51,14 @@ class TodoList extends React.Component {
     }
 }
 
+const mapDispatchToProps = {
+    filterTodos,
+};
+
 function mapStateToProps(state) {
     return {
-        todoArray: _.values(state.todoList.toJS()),
+        todoArray: (_.values(state.list.toJS())).filter(todo => todo.text.toLowerCase().includes(state.todoListMain)),
     };
 }
 
-export default connect(mapStateToProps)(TodoList)
+export default connect(mapStateToProps,mapDispatchToProps)(TodoListMain)

@@ -1,4 +1,4 @@
-const FEATURE = "[TODO_LIST]";
+const FEATURE = "[LIST]";
 
 export const DELETE_TODO = `${FEATURE} DELETE_TODO`;
 export const TOGGLE_TODO_STATUS = `${FEATURE} TOGGLE_TODO_STATUS`;
