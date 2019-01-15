@@ -1,23 +1,44 @@
 import React from 'react'
-import PropTypes from 'prop-types';
-import { Button } from 'reactstrap';
-import { Link } from 'react-router-dom'
 import cn from 'classnames';
+import PropTypes from 'prop-types';
+import { Button } from '@guestyci/atomic-design/dist/components';
+import { Link } from 'react-router-dom'
 
-const TodoItem = (props) => {
-    const { todoProperties: { id ,finished, text }, deleteTodo, toggleTodoStatus } = props;
-    return (
-        <li className="ui-state-default bg-white border-0 border-bottom-1 pt-3 pr-0" key={id}>
-            <div className={cn({"checked": finished})}>
-                <label onClick={toggleTodoStatus.bind(null, id)}>{text}</label>
-                <Link to={`/todos/${id}`}>
-                    <Button className="btn btn-sm btn-outline-success ml-5">Edit</Button>
-                </Link>
-                <Button className="btn btn-sm btn-outline-danger ml-5" onClick={deleteTodo.bind(null, id)}>Delete</Button>
-            </div>
-        </li>
-    )
-};
+
+class TodoItem extends React.Component {
+    constructor(props){
+        super(props);
+
+        this.onTodoDelete = this.onTodoDelete.bind(this);
+        this.onToggleTodoStatus = this.onToggleTodoStatus.bind(this);
+    }
+
+    onTodoDelete() {
+        const { todoProperties: { id }, deleteTodo} = this.props;
+        deleteTodo(id);
+    }
+
+    onToggleTodoStatus() {
+        const { todoProperties: { id }, toggleTodoStatus} = this.props;
+        toggleTodoStatus(id);
+    }
+
+    render(){
+        const { todoProperties: { id ,finished, text }} = this.props;
+
+        return (
+            <li className="ui-state-default bg-white border-0 border-bottom-1 pt-3 pr-0" key={id}>
+                <div className={cn({"checked": finished})}>
+                    <label onClick={this.onToggleTodoStatus}>{text}</label>
+                    <Link to={`/todos/${id}`}>
+                        <Button className="btn btn-sm ml-5" color="success">Edit</Button>
+                    </Link>
+                    <Button className="btn btn-sm ml-5" onClick={this.onTodoDelete} color="danger">Delete</Button>
+                </div>
+            </li>
+        );
+    }
+}
 
 TodoItem.propTypes = {
     todoProperties: PropTypes.shape({

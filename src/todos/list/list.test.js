@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount } from "enzyme";
 import immutable from "immutable";
-import { mountToJson } from "enzyme-to-json";
 import { Provider } from "react-redux";
+import { mountToJson } from "enzyme-to-json";
 import {combineReducers, createStore} from "redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -16,7 +16,7 @@ describe('<List />', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <Router>
-                    <Route exact path="/" component={List}/>
+                    <Route exact path="/" render={() => <List todoArray={[]}/>}/>
                 </Router>
             </Provider>
         );

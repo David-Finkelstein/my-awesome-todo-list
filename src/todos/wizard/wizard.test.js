@@ -29,7 +29,7 @@ describe('<TodoWizard />', () => {
             </Provider>
         );
 
-        const deleteOrEditBtn = wrapper.find('Button').at(0);
+        const deleteOrEditBtn = wrapper.find('#AddOrEditBtn').at(0);
         expect(mockProps.callback.mock.calls.length).toBe(0);
         deleteOrEditBtn.props().onClick();
         expect(mockProps.callback.mock.calls.length).toBe(1);

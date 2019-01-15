@@ -1,11 +1,11 @@
 import React from 'react'
-import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button } from '@guestyci/atomic-design/dist/components';
+import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
 import TodoItem from "./components/ListItem";
-import { toggleTodoStatus, deleteTodo } from "./list.actions";
+import {toggleTodoStatus, deleteTodo} from "./list.actions";
 
 class List extends React.Component {
     constructor(props) {
@@ -44,12 +44,18 @@ class List extends React.Component {
                             Are you sure you want to delete this todo?
                         </ModalBody>
                         <ModalFooter>
-                            <Button color="primary" onClick={this.onDeleteConfirmed}>Yes</Button>
-                            <Button color="secondary" onClick={this.toggle}>No</Button>
+                            <Button color="danger" onClick={this.onDeleteConfirmed}>Yes</Button>
+                            <Button color="success" onClick={this.toggle}>No</Button>
                         </ModalFooter>
-                </Modal> : null}
-                {todoArray.map(todoProperties => TodoItem({ todoProperties,
-                    deleteTodo: this.toggle.bind(this,todoProperties.id), toggleTodoStatus}))}
+                    </Modal> : null}
+                {todoArray.map(todoProperties =>
+                    <TodoItem
+                        key={todoProperties.id}
+                        todoProperties={todoProperties}
+                        deleteTodo={this.toggle}
+                        toggleTodoStatus={toggleTodoStatus}
+                    />
+                )}
             </ul>
         )
     }
@@ -61,15 +67,9 @@ List.propTypes = {
     toggleTodoStatus: PropTypes.func.isRequired,
 };
 
-function mapStateToProps(state) {
-    return {
-        todoArray: _.values(state.todoList.toJS()),
-    };
-}
-
-const mapDispatchToProps =  {
+const mapDispatchToProps = {
     deleteTodo,
     toggleTodoStatus,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(List)
+export default connect(null, mapDispatchToProps)(List)

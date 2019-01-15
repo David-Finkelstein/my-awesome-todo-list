@@ -17,22 +17,20 @@ exports[`<ListItem /> takes a snapshot of the component and check if the prev sn
       replace={false}
       to="/todos/12464535"
     >
-      <Button
-        className="btn btn-sm btn-outline-success ml-5"
-        color="secondary"
-        tag="button"
+      <Jt
+        className="btn btn-sm ml-5"
+        color="success"
       >
         Edit
-      </Button>
+      </Jt>
     </Link>
-    <Button
-      className="btn btn-sm btn-outline-danger ml-5"
-      color="secondary"
+    <Jt
+      className="btn btn-sm ml-5"
+      color="danger"
       onClick={[Function]}
-      tag="button"
     >
       Delete
-    </Button>
+    </Jt>
   </div>
 </li>
 `;

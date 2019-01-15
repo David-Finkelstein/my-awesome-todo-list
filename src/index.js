@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-import * as serviceWorker from './serviceWorker';
 import store from './store'
 import TodoList from './pages/TodoList'
+import * as serviceWorker from './serviceWorker';
 import wizardWrapper from "./pages/wizardWrapper";
 
 ReactDOM.render(
