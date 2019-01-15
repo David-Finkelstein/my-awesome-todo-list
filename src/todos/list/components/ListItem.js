@@ -19,12 +19,12 @@ class TodoItem extends React.Component {
     }
 
     onToggleTodoStatus() {
-        const { todoProperties: { id }, toggleTodoStatus} = this.props;
+        const { todoProperties: { id }, toggleTodoStatus } = this.props;
         toggleTodoStatus(id);
     }
 
     render(){
-        const { todoProperties: { id ,finished, text }} = this.props;
+        const { todoProperties: { id ,finished, text } } = this.props;
 
         return (
             <li className="ui-state-default bg-white border-0 border-bottom-1 pt-3 pr-0" key={id}>
