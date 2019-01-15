@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import store from './store'
-import TodoListMain from './pages/TodoListMain'
+import TodoList from './pages/TodoList'
 import * as serviceWorker from './serviceWorker';
 import wizardWrapper from "./pages/wizardWrapper";
 
@@ -12,7 +12,7 @@ ReactDOM.render(
     <Provider store={store}>
         <Router>
             <Switch>
-                <Route exact path="/" component={TodoListMain}/>
+                <Route exact path="/" component={TodoList}/>
                 <Route path="/new" component={wizardWrapper}/>
                 <Route path={"/todos/:id"} component={wizardWrapper}/>
             </Switch>

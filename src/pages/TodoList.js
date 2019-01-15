@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 import { Button, Search } from '@guestyci/atomic-design/dist/components';
 
 import List from "../todos/list/";
-import { filterTodos } from "./todoListMain.actions";
+import { filterTodos } from "../todos/list/list.actions";
 
-class TodoListMain extends React.Component {
+class TodoList extends React.Component {
     constructor(props){
         super(props);
 
@@ -57,8 +57,9 @@ const mapDispatchToProps = {
 
 function mapStateToProps(state) {
     return {
-        todoArray: (_.values(state.list.toJS())).filter(todo => todo.text.toLowerCase().includes(state.todoListMain)),
+        todoArray: (_.values(state.list.get('todoList').toJS()))
+            .filter(todo => todo.text.toLowerCase().includes(state.list.get('filterBy'))),
     };
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(TodoListMain)
+export default connect(mapStateToProps,mapDispatchToProps)(TodoList)
